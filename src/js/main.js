@@ -1,6 +1,12 @@
 import _ from 'lodash';
 
-const json = require('./json/sample.json');
+// Import our custom CSS
+import '../scss/styles.scss'
+
+// Import all of Bootstrap's JS
+import * as bootstrap from 'bootstrap'
+
+const json = require('../json/sample.json');
 
 function component() {
 	var element = document.createElement('div');
@@ -20,5 +26,5 @@ function jsonText() {
 	return element;
 }
 
-document.body.appendChild(component());
-document.body.appendChild(jsonText());
+// document.body.appendChild(component());
+// document.body.appendChild(jsonText());
