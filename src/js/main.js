@@ -29,6 +29,10 @@ function jsonText() {
 	return element;
 }
 
+function coinFlip() {
+	return Math.random() < 0.5
+}
+
 // document.body.appendChild(component());
 // document.body.appendChild(jsonText());
 
