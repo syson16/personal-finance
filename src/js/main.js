@@ -52,9 +52,9 @@ function flipCoin() {
 
 		for(let i = 0; i < n; i++) {
 			if(flipCoin()) {
-				res.push(1);
+				res.push(30);
 			} else {
-				res.push(-1);
+				res.push(-30);
 			}
 		}
 
@@ -78,7 +78,7 @@ function flipCoin() {
 	// Graphs
 	const ctx = document.getElementById('myChart')
 
-	let start = 10
+	let start = 100
 
 	let totalResult = result.reduce((accumulator, currentValue) => {
 		let newVal = accumulator[accumulator.length - 1] + currentValue
@@ -133,5 +133,27 @@ function flipCoin() {
 		},
 	  }
 	})
+
+	const gamblerBtn = document.getElementById('gambler-run')
+
+	gamblerBtn.addEventListener("click", function() {
+		let newRes = flipCoinMultipleTime(coinFlipNumber);
+
+		let start = 100
+
+		let totalResult = newRes.reduce((accumulator, currentValue) => {
+			let newVal = accumulator[accumulator.length - 1] + currentValue
+			accumulator.push(newVal)
+			return accumulator
+			}
+			,
+			[start]
+		)
+		myChart.data.datasets.forEach((dataset) => {
+			dataset.data = totalResult;
+		});
+
+		myChart.update();
+	});
   })()
   
