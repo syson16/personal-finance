@@ -1,5 +1,8 @@
 import _ from 'lodash';
 
+import { Chart, registerables } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
 // Import our custom CSS
 import '../scss/styles.scss'
 
@@ -29,7 +32,7 @@ function jsonText() {
 	return element;
 }
 
-function coinFlip() {
+function flipCoin() {
 	return Math.random() < 0.5
 }
 
@@ -40,32 +43,60 @@ function coinFlip() {
 
 (() => {
 	'use strict'
-  
+
+	Chart.register(...registerables);
+	Chart.register(annotationPlugin);
+
+	function flipCoinMultipleTime(n) {
+		let res = [];
+
+		for(let i = 0; i < n; i++) {
+			if(flipCoin()) {
+				res.push(1);
+			} else {
+				res.push(-1);
+			}
+		}
+
+		return res
+	}
+
+	function flipCoinMultipleTimeColumns(n) {
+		let cols = [];
+
+		for(let i = 0; i < n + 1; i++) {
+			cols.push(i)
+		}
+
+		return cols
+	}
+	
+	let coinFlipNumber = 500;
+	let result = flipCoinMultipleTime(coinFlipNumber);
+	let columns = flipCoinMultipleTimeColumns(coinFlipNumber);
+
 	// Graphs
 	const ctx = document.getElementById('myChart')
+
+	let start = 10
+
+	let totalResult = result.reduce((accumulator, currentValue) => {
+		let newVal = accumulator[accumulator.length - 1] + currentValue
+		accumulator.push(newVal)
+		return accumulator
+		}
+		,
+		[start]
+	)
+
+
 	// eslint-disable-next-line no-unused-vars
 	const myChart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
-		labels: [
-		  'Sunday',
-		  'Monday',
-		  'Tuesday',
-		  'Wednesday',
-		  'Thursday',
-		  'Friday',
-		  'Saturday'
-		],
+		labels: columns,
 		datasets: [{
-		  data: [
-			15339,
-			21345,
-			18483,
-			24003,
-			23489,
-			24092,
-			12034
-		  ],
+		  data: totalResult,
 		  lineTension: 0,
 		  backgroundColor: 'transparent',
 		  borderColor: '#007bff',
@@ -80,8 +111,26 @@ function coinFlip() {
 		  },
 		  tooltip: {
 			boxPadding: 3
+		  },
+		  annotation: {
+			annotations: {
+			  line1: {
+				type: 'line',
+				yMin: 0,
+				yMax: 0,
+				borderColor: 'rgb(255, 99, 132)',
+				borderWidth: 2,
+				label: {
+					display: true,
+					position: 'center',
+					content: 'Dead',
+					color: 'rgb(255, 99, 132)',
+					borderColor: 'white'
+				}
+			  }
+			}
 		  }
-		}
+		},
 	  }
 	})
   })()
