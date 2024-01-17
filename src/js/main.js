@@ -50,12 +50,22 @@ function flipCoin() {
 	let cols = [0];
 	let res = [100];
 
+	const gamblerResultBtn = document.getElementById('gambler-result');
+
 	function flipCoinOneTime(res) {
 		
+		gamblerResultBtn.classList.remove("btn-secondary");
+		gamblerResultBtn.classList.remove("btn-success");
+		gamblerResultBtn.classList.remove("btn-danger");
+
 		if(flipCoin()) {
 			res.push(res[res.length - 1] + 30);
+			gamblerResultBtn.classList.add("btn-success");
+			gamblerResultBtn.innerHTML = "WIN";
 		} else {
 			res.push(res[res.length - 1] - 30);
+			gamblerResultBtn.classList.add("btn-danger");
+			gamblerResultBtn.innerHTML = "LOSE";
 		}
 
 		return res
