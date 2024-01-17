@@ -47,56 +47,55 @@ function flipCoin() {
 	Chart.register(...registerables);
 	Chart.register(annotationPlugin);
 
-	function flipCoinMultipleTime(n) {
-		let res = [];
+	let cols = [0];
+	let res = [100];
 
-		for(let i = 0; i < n; i++) {
-			if(flipCoin()) {
-				res.push(30);
-			} else {
-				res.push(-30);
-			}
+	function flipCoinOneTime(res) {
+		
+		if(flipCoin()) {
+			res.push(res[res.length - 1] + 30);
+		} else {
+			res.push(res[res.length - 1] - 30);
 		}
 
 		return res
 	}
 
-	function flipCoinMultipleTimeColumns(n) {
-		let cols = [];
+	function flipCoinMultipleTime(n, res) {
 
-		for(let i = 0; i < n + 1; i++) {
-			cols.push(i)
+		for(let i = 0; i < n; i++) {
+			res = flipCoinOneTime(res)
+		}
+
+		return res
+	}
+
+	function addColumnOneTime(cols) {
+
+		cols.push(cols[cols.length - 1] + 1);
+
+		return cols
+	}
+
+	function flipCoinMultipleTimeColumns(n, cols) {
+
+		for(let i = 0; i < n; i++) {
+			cols = addColumnOneTime(cols)
 		}
 
 		return cols
 	}
-	
-	let coinFlipNumber = 500;
-	let result = flipCoinMultipleTime(coinFlipNumber);
-	let columns = flipCoinMultipleTimeColumns(coinFlipNumber);
 
 	// Graphs
 	const ctx = document.getElementById('myChart')
-
-	let start = 100
-
-	let totalResult = result.reduce((accumulator, currentValue) => {
-		let newVal = accumulator[accumulator.length - 1] + currentValue
-		accumulator.push(newVal)
-		return accumulator
-		}
-		,
-		[start]
-	)
-
 
 	// eslint-disable-next-line no-unused-vars
 	const myChart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
-		labels: columns,
+		labels: cols,
 		datasets: [{
-		  data: totalResult,
+		  data: res,
 		  lineTension: 0,
 		  backgroundColor: 'transparent',
 		  borderColor: '#007bff',
@@ -134,25 +133,31 @@ function flipCoin() {
 	  }
 	})
 
-	const gamblerBtn = document.getElementById('gambler-run')
+	const gamblerBtn = document.getElementById('gambler-run');
+	const gamblerOneTimeBtn = document.getElementById('gambler-onetime-run');
+	const gamblerResetBtn = document.getElementById('gambler-reset');
+
+	gamblerOneTimeBtn.addEventListener("click", function() {
+		addColumnOneTime(cols)
+		flipCoinOneTime(res)
+		myChart.update();
+	});
+
+	gamblerResetBtn.addEventListener("click", function() {
+		cols = [0];
+		res = [100];
+		myChart.data.datasets.forEach((dataset) => {
+			dataset.data = res;
+		});
+		myChart.data.labels = cols;
+		myChart.update();
+	});
 
 	gamblerBtn.addEventListener("click", function() {
-		let newRes = flipCoinMultipleTime(coinFlipNumber);
-
-		let start = 100
-
-		let totalResult = newRes.reduce((accumulator, currentValue) => {
-			let newVal = accumulator[accumulator.length - 1] + currentValue
-			accumulator.push(newVal)
-			return accumulator
-			}
-			,
-			[start]
-		)
-		myChart.data.datasets.forEach((dataset) => {
-			dataset.data = totalResult;
-		});
-
+		for(let i = 0; i < 10; i++) {
+			addColumnOneTime(cols)
+			flipCoinOneTime(res)
+		}
 		myChart.update();
 	});
   })()
