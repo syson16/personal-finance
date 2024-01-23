@@ -50,6 +50,20 @@ function flipCoin() {
 	let cols = [0];
 	let res = [100];
 
+	function budgetUpdate() {
+		let budgetText = document.getElementById('total-budget');
+
+		let currentBudget = res[res.length - 1];
+
+		if (currentBudget > 0) {
+			budgetText.innerHTML = "$" + currentBudget;
+		} else {
+			currentBudget = -1 * currentBudget;
+			budgetText.innerHTML = "-$" + currentBudget;
+		}
+	}
+
+	budgetUpdate()
 	const gamblerResultBtn = document.getElementById('gambler-result');
 
 	function flipCoinOneTime(res) {
@@ -151,6 +165,7 @@ function flipCoin() {
 		addColumnOneTime(cols)
 		flipCoinOneTime(res)
 		myChart.update();
+		budgetUpdate()
 	});
 
 	gamblerResetBtn.addEventListener("click", function() {
@@ -161,6 +176,7 @@ function flipCoin() {
 		});
 		myChart.data.labels = cols;
 		myChart.update();
+		budgetUpdate()
 	});
 
 	gamblerBtn.addEventListener("click", function() {
@@ -169,6 +185,7 @@ function flipCoin() {
 			flipCoinOneTime(res)
 		}
 		myChart.update();
+		budgetUpdate()
 	});
   })()
   
