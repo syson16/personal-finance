@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({ filename: 'compound-interest.html', template: './src/compound-interest.html' }),
     new CopyWebpackPlugin({
       patterns: [
           { from: 'src/asset' }
