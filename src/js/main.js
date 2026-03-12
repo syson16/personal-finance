@@ -49,10 +49,18 @@ function flipCoin() {
 
 	let cols = [0];
 	let res = [100];
+	const budgetText = document.getElementById('total-budget');
+	const gamblerResultBtn = document.getElementById('gambler-result');
+	const ctx = document.getElementById('myChart')
+	const gamblerBtn = document.getElementById('gambler-run');
+	const gamblerOneTimeBtn = document.getElementById('gambler-onetime-run');
+	const gamblerResetBtn = document.getElementById('gambler-reset');
+
+	if (!budgetText || !gamblerResultBtn || !ctx || !gamblerBtn || !gamblerOneTimeBtn || !gamblerResetBtn) {
+		return;
+	}
 
 	function budgetUpdate() {
-		let budgetText = document.getElementById('total-budget');
-
 		let currentBudget = res[res.length - 1];
 
 		if (currentBudget > 0) {
@@ -64,7 +72,6 @@ function flipCoin() {
 	}
 
 	budgetUpdate()
-	const gamblerResultBtn = document.getElementById('gambler-result');
 
 	function flipCoinOneTime(res) {
 		
@@ -110,9 +117,6 @@ function flipCoin() {
 		return cols
 	}
 
-	// Graphs
-	const ctx = document.getElementById('myChart')
-
 	// eslint-disable-next-line no-unused-vars
 	const myChart = new Chart(ctx, {
 	  type: 'line',
@@ -156,10 +160,6 @@ function flipCoin() {
 		},
 	  }
 	})
-
-	const gamblerBtn = document.getElementById('gambler-run');
-	const gamblerOneTimeBtn = document.getElementById('gambler-onetime-run');
-	const gamblerResetBtn = document.getElementById('gambler-reset');
 
 	gamblerOneTimeBtn.addEventListener("click", function() {
 		addColumnOneTime(cols)
