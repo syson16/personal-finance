@@ -12,9 +12,43 @@
         </div>
             </div>
     </div>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 text-bg-dark">
-        <h1 class="h2" id="total-budget"></h1>
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl">
+            <div class="border border-primary rounded p-3 h-100 bg-primary-subtle">
+                <div class="text-body-secondary small">Bankroll</div>
+                <div class="display-6 fw-semibold text-primary mb-0" id="total-budget">$100</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Win probability</div>
+                <div class="h4 mb-0" id="gambler-win-probability">50%</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Loss probability</div>
+                <div class="h4 mb-0" id="gambler-loss-probability">50%</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Win amount</div>
+                <div class="h4 mb-0 text-success" id="gambler-win-amount">+$30</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Loss amount</div>
+                <div class="h4 mb-0 text-danger" id="gambler-loss-amount">-$30</div>
+            </div>
+        </div>
     </div>
-
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    <div class="gambler-chart-wrap">
+        <div class="gambler-dead-overlay d-none" id="gambler-dead-overlay">
+            <div class="h3 mb-3">YOU DIED</div>
+            <button type="button" class="btn btn-danger" id="gambler-dead-reset">Reset</button>
+        </div>
+        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    </div>
 </main>
