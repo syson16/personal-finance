@@ -4,6 +4,7 @@ const path = require('path')
 const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
@@ -20,6 +21,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new HtmlWebpackPlugin({ filename: 'compound-interest.html', template: './src/compound-interest.html' }),
+    new MiniCssExtractPlugin({ filename: 'main.css' }),
     new CopyWebpackPlugin({
       patterns: [
           { from: 'src/asset' }
@@ -32,8 +34,8 @@ module.exports = {
         test: /\.(scss)$/,
         use: [
           {
-            // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
+            // Emits CSS as a real file so it can load before the JS bundle.
+            loader: MiniCssExtractPlugin.loader
           },
           {
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
