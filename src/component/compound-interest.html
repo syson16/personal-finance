@@ -12,13 +12,132 @@
             </figcaption>
         </figure>
         <div class="fs-5">
-            <p>From Charlie Munger's quote, you can see how he ranks in mathematics.</p>
+            <p>From Charlie Munger's quote, you can see how highly he ranks these mathematical ideas.</p>
             <ol>
                 <li>Basic arithmetic</li>
-                <li>Compound Interest</li>
+                <li>Compound interest</li>
                 <li>Permutations and Combinations</li>
             </ol>
             <p>Understanding the power of compound interest is essential for investors and anyone living in a capitalist society.</p>
+        </div>
+    </div>
+    <div class="pt-3 pb-2 mb-3 border-bottom">
+        <h2 class="h4">Run the numbers</h2>
+    </div>
+    <p class="text-body-secondary">
+        The longer the timeline gets, the more compound interest separates from flat interest plus regular contributions.
+    </p>
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <form id="compound-form" class="border rounded p-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="compound-principal" class="form-label">Initial investment</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="compound-principal" value="100,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="compound-contribution" class="form-label">Monthly contribution</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="compound-contribution" value="500">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="compound-rate" class="form-label">Annual return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="compound-rate" value="7" min="0" step="0.1">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="compound-years" class="form-label">Years</label>
+                    <input type="number" class="form-control" id="compound-years" value="20" min="1" max="80" step="1">
+                </div>
+                <button type="button" class="btn btn-outline-primary w-100 mb-2" id="compound-add-year">+1 year</button>
+                <button type="button" class="btn btn-outline-secondary w-100 mb-2" id="compound-reset">Reset defaults</button>
+                <button type="submit" class="btn btn-primary w-100">Calculate</button>
+            </form>
+            <div class="border rounded p-3 mt-3">
+                <h3 class="h5">Formula</h3>
+                <p class="fs-5 mb-3">
+                    <code>FV = P(1 + i)<sup>N</sup> + PMT x (((1 + i)<sup>N</sup> - 1) / i)</code>
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Symbol</th>
+                                <th scope="col">Input</th>
+                                <th scope="col">Current value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><code>P</code></th>
+                                <td>Initial investment</td>
+                                <td id="formula-principal">$100,000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>PMT</code></th>
+                                <td>Monthly contribution</td>
+                                <td id="formula-contribution">$500</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>r</code></th>
+                                <td>Annual return</td>
+                                <td id="formula-rate">7%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>i</code></th>
+                                <td>Monthly rate, <code>r / 12</code></td>
+                                <td id="formula-monthly-rate">0.58%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>t</code></th>
+                                <td>Years</td>
+                                <td id="formula-years">20</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>N</code></th>
+                                <td>Total months, <code>12 x t</code></td>
+                                <td id="formula-months">240</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Final balance</div>
+                        <div class="h4 mb-0" id="compound-final">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Total contributions</div>
+                        <div class="h4 mb-0" id="compound-invested">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Interest earned</div>
+                        <div class="h4 mb-0" id="compound-earned">$0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-success-subtle rounded p-3 mb-4 bg-success-subtle">
+                <div class="text-body-secondary small">Compounding advantage</div>
+                <div class="h3 mb-1" id="compound-advantage">$0</div>
+                <p class="mb-0" id="compound-advantage-note">
+                    Compound interest and flat interest are equal at the starting point.
+                </p>
+            </div>
+            <canvas class="my-4 w-100" id="compoundChart" width="900" height="380"></canvas>
         </div>
     </div>
 </main>
