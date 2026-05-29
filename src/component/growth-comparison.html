@@ -1,0 +1,84 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Polynomial vs Exponential Growth</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" class="btn btn-primary" id="growth-add-step">Add next value</button>
+            <button type="button" class="btn btn-outline-primary ms-2" id="growth-add-ten">+10 values</button>
+            <button type="button" class="btn btn-outline-secondary ms-2" id="growth-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <p class="text-body-secondary">
+            The exponential curve uses a small, realistic multiplier: <code>1.07</code>. It starts below <code>n^2</code>, then eventually passes it and keeps widening the gap.
+        </p>
+        <div class="border rounded p-3 bg-body-tertiary">
+            <h2 class="h5">Why this is compound interest</h2>
+            <p>
+                Exponential growth is the math behind compound interest. A 7% annual return means each period multiplies the previous balance by <code>1.07</code>, so after <code>n</code> periods the balance is <code>1.07^n</code>.
+            </p>
+            <p>
+                The important part is that the next gain is earned on the whole previous result, not just on the original starting amount. Interest earns more interest. That repeated multiplication is why the green line looks quiet early and then bends upward later.
+            </p>
+            <p class="mb-0">
+                Polynomial growth like <code>n^2</code> can look stronger at first because it adds larger absolute chunks early. But it is still built from powers of <code>n</code>. Compound interest is built from repeatedly multiplying by a return factor, and that eventually dominates.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Current n</div>
+                <div class="h4 mb-0" id="growth-current-step">2</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border border-primary rounded p-3 h-100 bg-primary-subtle">
+                <div class="text-body-secondary small">Polynomial n^2</div>
+                <div class="h4 mb-0 text-primary" id="growth-polynomial-value">4</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border border-success rounded p-3 h-100 bg-success-subtle">
+                <div class="text-body-secondary small">Exponential 1.07^n</div>
+                <div class="h4 mb-0 text-success" id="growth-exponential-value">1.14</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl">
+            <div class="border rounded p-3 h-100">
+                <div class="text-body-secondary small">Leader</div>
+                <div class="h4 mb-0" id="growth-leader">Polynomial</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-success-subtle rounded p-3 mb-4 bg-success-subtle d-none" id="growth-crossover-alert">
+        <div class="text-body-secondary small">Crossover</div>
+        <div class="h4 mb-1">Exponential growth has taken the lead.</div>
+        <p class="mb-0" id="growth-crossover-note"></p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-xl-8">
+            <canvas class="my-4 w-100" id="growthComparisonChart" width="900" height="380"></canvas>
+        </div>
+        <div class="col-xl-4">
+            <div class="border rounded p-3 bg-body-tertiary growth-table-panel">
+                <h2 class="h5">Latest values</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">n</th>
+                                <th scope="col">n^2</th>
+                                <th scope="col">1.07^n</th>
+                            </tr>
+                        </thead>
+                        <tbody id="growth-values-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

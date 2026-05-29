@@ -21,6 +21,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new HtmlWebpackPlugin({ filename: 'compound-interest.html', template: './src/compound-interest.html' }),
+    new HtmlWebpackPlugin({ filename: 'growth-comparison.html', template: './src/growth-comparison.html' }),
     new MiniCssExtractPlugin({ filename: 'main.css' }),
     new CopyWebpackPlugin({
       patterns: [
