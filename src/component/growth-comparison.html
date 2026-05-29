@@ -12,6 +12,55 @@
             <p>
                 Exponential growth is the math behind compound interest. A 7% annual return means each period multiplies the previous balance by <code>1.07</code>, so after <code>n</code> periods the balance is <code>1.07^n</code>.
             </p>
+            <div class="border rounded p-3 my-3 bg-body">
+                <div class="text-body-secondary small mb-2">Compound interest with P = $100,000 and r = 7%</div>
+                <math display="block" class="mb-3">
+                    <mrow>
+                        <mi>A</mi>
+                        <mo>=</mo>
+                        <mi>P</mi>
+                        <msup>
+                            <mrow>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <mi>r</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <mi>n</mi>
+                        </msup>
+                    </mrow>
+                </math>
+                <math display="block" class="mb-3">
+                    <mrow>
+                        <mi>A</mi>
+                        <mo>=</mo>
+                        <mn>100,000</mn>
+                        <msup>
+                            <mrow>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <mn>0.07</mn>
+                                <mo>)</mo>
+                            </mrow>
+                            <mi>n</mi>
+                        </msup>
+                    </mrow>
+                </math>
+                <math display="block">
+                    <mrow>
+                        <mi>A</mi>
+                        <mo>=</mo>
+                        <mn>100,000</mn>
+                        <mo>&times;</mo>
+                        <msup>
+                            <mn>1.07</mn>
+                            <mi>n</mi>
+                        </msup>
+                    </mrow>
+                </math>
+            </div>
             <p>
                 The important part is that the next gain is earned on the whole previous result, not just on the original starting amount. Interest earns more interest. That repeated multiplication is why the green line looks quiet early and then bends upward later.
             </p>
