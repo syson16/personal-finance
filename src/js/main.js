@@ -326,8 +326,10 @@ function flipCoin() {
 
 	if (growthAddStepButton && growthAddTenButton && growthResetButton && growthCurrentStep && growthPolynomialValue && growthExponentialValue && growthLeader && growthValuesTable && growthComparisonCtx) {
 		const exponentialBase = 1.07;
-		const initialStep = 2;
-		let growthSteps = [initialStep];
+		const initialStep = 8;
+		let growthSteps = Array.from({ length: initialStep }, function(_value, index) {
+			return index + 1;
+		});
 
 		function calculateGrowthPoint(step) {
 			return {
@@ -445,7 +447,9 @@ function flipCoin() {
 		});
 
 		growthResetButton.addEventListener('click', function() {
-			growthSteps = [initialStep];
+			growthSteps = Array.from({ length: initialStep }, function(_value, index) {
+				return index + 1;
+			});
 			updateGrowthComparison();
 		});
 
