@@ -339,6 +339,19 @@ function flipCoin() {
 			};
 		}
 
+		function findGrowthCrossover(points) {
+			for (let index = 1; index < points.length; index++) {
+				const previousPoint = points[index - 1];
+				const currentPoint = points[index];
+
+				if (previousPoint.exponential <= previousPoint.polynomial && currentPoint.exponential > currentPoint.polynomial) {
+					return currentPoint;
+				}
+			}
+
+			return null;
+		}
+
 		function formatGrowthValue(value) {
 			return growthFormatter.format(value);
 		}
@@ -403,7 +416,7 @@ function flipCoin() {
 		function updateGrowthComparison() {
 			const points = growthSteps.map(calculateGrowthPoint);
 			const currentPoint = points[points.length - 1];
-			const crossoverPoint = points.find((point) => point.exponential > point.polynomial);
+			const crossoverPoint = findGrowthCrossover(points);
 			const leader = currentPoint.exponential > currentPoint.polynomial ? 'Exponential' : 'Polynomial';
 
 			growthCurrentStep.innerHTML = currentPoint.step;

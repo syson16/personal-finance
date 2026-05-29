@@ -9,12 +9,6 @@
     </div>
     <div class="row g-3 mb-4">
         <div class="col-sm-6 col-xl">
-            <div class="border border-primary rounded p-3 h-100 bg-primary-subtle">
-                <div class="text-body-secondary small">Bankroll</div>
-                <div class="display-6 fw-semibold text-primary mb-0" id="total-budget">$100</div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl">
             <div class="border rounded p-3 h-100">
                 <div class="text-body-secondary small">Win probability</div>
                 <div class="h4 mb-0" id="gambler-win-probability">50%</div>
@@ -39,7 +33,11 @@
             </div>
         </div>
     </div>
-    <div class="interactive-action-bar">
+    <div class="interactive-action-bar interactive-action-bar-with-status">
+        <div class="interactive-status border border-primary rounded bg-primary-subtle">
+            <div class="text-body-secondary small">Bankroll</div>
+            <div class="h4 fw-semibold text-primary mb-0" id="total-budget">$100</div>
+        </div>
         <div class="btn-toolbar gap-2">
             <button type="button" class="btn btn-primary" id="gambler-run">Run</button>
             <button type="button" class="btn btn-success" id="gambler-onetime-run">One Time</button>

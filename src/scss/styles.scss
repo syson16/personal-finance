@@ -141,9 +141,29 @@
     justify-content: flex-end;
   }
 
+  .interactive-action-bar-with-status {
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .interactive-action-bar-with-status .btn-toolbar {
+    width: auto;
+    flex: 1;
+  }
+
+  .interactive-status {
+    min-width: 9rem;
+    padding: .5rem .75rem;
+  }
+
   @media (max-width: 767.98px) {
     main:has(.interactive-action-bar) {
       padding-bottom: 6rem;
+    }
+
+    main:has(.interactive-action-bar-with-status) {
+      padding-bottom: 8.5rem;
     }
 
     .interactive-action-bar {
@@ -158,6 +178,24 @@
       border-left: 0;
       border-radius: 0;
       box-shadow: 0 -.5rem 1rem rgba(0, 0, 0, .2);
+    }
+
+    .interactive-action-bar-with-status {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: .5rem;
+    }
+
+    .interactive-action-bar-with-status .interactive-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .interactive-action-bar-with-status .btn-toolbar {
+      width: 100%;
     }
 
     .interactive-action-bar .btn-toolbar {

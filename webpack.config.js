@@ -55,7 +55,17 @@ module.exports = {
           },
           {
             // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                silenceDeprecations: [
+                  'color-functions',
+                  'global-builtin',
+                  'import',
+                  'if-function'
+                ]
+              }
+            }
           }
         ]
       }
