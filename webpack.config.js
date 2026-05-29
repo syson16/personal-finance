@@ -8,10 +8,21 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/main.js',
+  entry: {
+    main: './src/js/main.js',
+    gamblersRuin: './src/js/gamblers-ruin.js',
+    compoundInterest: './src/js/compound-interest.js',
+    growthComparison: './src/js/growth-comparison.js'
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(__dirname, 'dist')
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   devServer: {
     static: path.resolve(__dirname, 'dist'),
@@ -19,9 +30,20 @@ module.exports = {
     hot: true
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new HtmlWebpackPlugin({ filename: 'compound-interest.html', template: './src/compound-interest.html' }),
-    new HtmlWebpackPlugin({ filename: 'growth-comparison.html', template: './src/growth-comparison.html' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      chunks: ['main', 'gamblersRuin']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'compound-interest.html',
+      template: './src/compound-interest.html',
+      chunks: ['main', 'compoundInterest']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'growth-comparison.html',
+      template: './src/growth-comparison.html',
+      chunks: ['main', 'growthComparison']
+    }),
     new MiniCssExtractPlugin({ filename: 'main.css' }),
     new CopyWebpackPlugin({
       patterns: [
