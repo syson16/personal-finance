@@ -15,7 +15,8 @@ module.exports = {
     growthComparison: './src/js/growth-comparison.js',
     volatilityDrag: './src/js/volatility-drag.js',
     drawdownRecovery: './src/js/drawdown-recovery.js',
-    getRichOnce: './src/js/get-rich-once.js'
+    getRichOnce: './src/js/get-rich-once.js',
+    sequenceOfReturns: './src/js/sequence-of-returns.js'
   },
   output: {
     filename: '[name].js',
@@ -61,6 +62,11 @@ module.exports = {
       filename: 'get-rich-once.html',
       template: './src/get-rich-once.html',
       chunks: ['main', 'getRichOnce']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'sequence-of-returns.html',
+      template: './src/sequence-of-returns.html',
+      chunks: ['main', 'sequenceOfReturns']
     }),
     new MiniCssExtractPlugin({ filename: 'main.css' }),
     new CopyWebpackPlugin({

@@ -1,0 +1,123 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Sequence of Returns Risk</h1>
+    </div>
+
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
+        <h2 class="h5">Why the order of returns matters</h2>
+        <p class="mb-2">
+            Two portfolios can have the same average return and still end very differently when money is being withdrawn.
+        </p>
+        <p class="mb-2">
+            Bad returns early in retirement shrink the base while withdrawals keep coming out. Good returns later may arrive too late to repair the damage.
+        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <p class="mt-2">
+                This is different from ordinary compounding. Without withdrawals, the order of annual returns does not change the final balance. With withdrawals, the order matters because each withdrawal locks in how much capital remains exposed to the next return.
+            </p>
+            <p class="mb-0">
+                The calculator uses the same return set in both paths. One path puts the bad years first; the other puts those same bad years last.
+            </p>
+        </details>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <form id="sequence-form" class="border rounded p-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="sequence-start" class="form-label">Starting balance</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="sequence-start" value="2,000,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sequence-withdrawal" class="form-label">Annual withdrawal</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="sequence-withdrawal" value="80,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sequence-average-return" class="form-label">Average annual return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="sequence-average-return" value="6" min="-20" max="30" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sequence-bad-return" class="form-label">Bad-year return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="sequence-bad-return" value="-18" min="-80" max="0" step="1">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sequence-bad-years" class="form-label">Bad years</label>
+                    <input type="number" class="form-control" id="sequence-bad-years" value="3" min="1" max="15" step="1">
+                </div>
+                <div class="mb-0">
+                    <label for="sequence-years" class="form-label">Simulation years</label>
+                    <input type="number" class="form-control" id="sequence-years" value="30" min="2" max="60" step="1">
+                </div>
+            </form>
+            <div class="border rounded p-3 mt-3">
+                <h2 class="h5">Return set</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Years</th>
+                                <th scope="col">Return</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sequence-return-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-6 col-xl-3">
+                    <div class="border border-danger rounded p-3 h-100 bg-danger-subtle">
+                        <div class="text-body-secondary small">Bad early final</div>
+                        <div class="h4 mb-0 text-danger" id="sequence-bad-early-final">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border border-success rounded p-3 h-100 bg-success-subtle">
+                        <div class="text-body-secondary small">Bad late final</div>
+                        <div class="h4 mb-0 text-success" id="sequence-bad-late-final">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Final gap</div>
+                        <div class="h4 mb-0" id="sequence-final-gap">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Failure year</div>
+                        <div class="h4 mb-0" id="sequence-failure-year">Never</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-warning-subtle rounded p-3 mb-4 bg-warning-subtle">
+                <div class="text-body-secondary small">Same average, different path</div>
+                <div class="h4 mb-1" id="sequence-risk-note">Withdrawals make early losses more dangerous.</div>
+                <p class="mb-0" id="sequence-withdrawal-note"></p>
+            </div>
+            <div class="interactive-action-bar">
+                <div class="btn-toolbar gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="sequence-add-withdrawal">+$10k withdrawal</button>
+                    <button type="button" class="btn btn-outline-primary" id="sequence-add-bad-year">+1 bad year</button>
+                    <button type="button" class="btn btn-outline-secondary" id="sequence-reset">Reset</button>
+                    <button type="submit" class="btn btn-primary" form="sequence-form">Calculate</button>
+                </div>
+            </div>
+            <canvas class="my-4 w-100" id="sequenceChart" width="900" height="380"></canvas>
+        </div>
+    </div>
+</main>
