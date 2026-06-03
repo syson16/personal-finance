@@ -1,0 +1,126 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Get Rich Once</h1>
+    </div>
+
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
+        <h2 class="h5">Why enough capital changes the game</h2>
+        <p class="mb-2">
+            You only need to get rich once. After that, moderate returns on enough capital can produce enough money without heroic assumptions.
+        </p>
+        <p class="mb-2">
+            A normal return on a large base can produce more dollars than an extraordinary return on a small base.
+        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <p class="mt-2">
+                Before the target, growth matters because the capital base is still small. After the target, the same moderate percentage return produces a much larger dollar amount.
+            </p>
+            <p class="mb-0">
+                The point is not that 5% is magic. The point is that enough capital turns ordinary returns into meaningful annual income.
+            </p>
+        </details>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <form id="rich-once-form" class="border rounded p-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="rich-current" class="form-label">Current capital</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="rich-current" value="250,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="rich-target" class="form-label">Rich enough target</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="rich-target" value="2,000,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="rich-aggressive-return" class="form-label">Before-target return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="rich-aggressive-return" value="12" min="0" max="50" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="rich-modest-return" class="form-label">After-target return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="rich-modest-return" value="5" min="0" max="20" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="rich-spending" class="form-label">Annual spending goal</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="rich-spending" value="80,000">
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <label for="rich-years" class="form-label">Simulation years</label>
+                    <input type="number" class="form-control" id="rich-years" value="30" min="1" max="80" step="1">
+                </div>
+            </form>
+            <div class="border rounded p-3 mt-3">
+                <h2 class="h5">Base matters</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Capital</th>
+                                <th scope="col" id="rich-base-return-label">5% return</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rich-base-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-6 col-xl-3">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Target reached</div>
+                        <div class="h4 mb-0" id="rich-target-year">Not yet</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border border-success rounded p-3 h-100 bg-success-subtle">
+                        <div class="text-body-secondary small">Modest income</div>
+                        <div class="h4 mb-0 text-success" id="rich-modest-income">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Required return</div>
+                        <div class="h4 mb-0" id="rich-required-return">0%</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="border border-primary rounded p-3 h-100 bg-primary-subtle">
+                        <div class="text-body-secondary small">Annual surplus</div>
+                        <div class="h4 mb-0" id="rich-income-gap">$0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-primary-subtle rounded p-3 mb-4 bg-primary-subtle">
+                <div class="text-body-secondary small">Enough changes the math</div>
+                <div class="h4 mb-1" id="rich-once-note">Moderate returns can be enough when the capital base is large enough.</div>
+                <p class="mb-0" id="rich-income-note"></p>
+            </div>
+            <div class="interactive-action-bar">
+                <div class="btn-toolbar gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="rich-add-target">+$500k target</button>
+                    <button type="button" class="btn btn-outline-primary" id="rich-add-modest-return">+1% modest</button>
+                    <button type="button" class="btn btn-outline-secondary" id="rich-reset">Reset</button>
+                    <button type="submit" class="btn btn-primary" form="rich-once-form">Calculate</button>
+                </div>
+            </div>
+            <canvas class="my-4 w-100" id="richOnceChart" width="900" height="380"></canvas>
+        </div>
+    </div>
+</main>
