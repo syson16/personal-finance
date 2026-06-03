@@ -1,0 +1,133 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Drawdown Recovery</h1>
+    </div>
+
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
+        <h2 class="h5">Why losses are harder to recover from</h2>
+        <p class="mb-2">
+            Losses and gains are asymmetric. A 50% loss does not need a 50% gain to recover; it needs a 100% gain.
+        </p>
+        <p class="mb-2">
+            The deeper the drawdown, the more return you need just to get back to even.
+        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <figure>
+                <blockquote class="blockquote">
+                    <p>Rule No. 1: Never lose money. Rule No. 2: Never forget Rule No. 1.</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">Warren Buffett</figcaption>
+            </figure>
+            <p class="mt-2">
+                Recovery is measured from the smaller post-loss balance. If $100 falls to $50, a $50 gain is now a 100% return because the base is only $50.
+            </p>
+            <p class="mb-0">
+                This is why avoiding large losses matters. Compound interest can help rebuild capital, but the recovery timeline gets longer as the drawdown gets deeper.
+            </p>
+        </details>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <form id="drawdown-form" class="border rounded p-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="drawdown-start" class="form-label">Starting balance</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="drawdown-start" value="100,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="drawdown-loss" class="form-label">Drawdown</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="drawdown-loss" value="50" min="1" max="95" step="1">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="drawdown-return" class="form-label">Annual return after loss</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="drawdown-return" value="8" min="0" max="50" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="drawdown-contribution" class="form-label">Monthly contribution</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="drawdown-contribution" value="0">
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <label for="drawdown-years" class="form-label">Max recovery years</label>
+                    <input type="number" class="form-control" id="drawdown-years" value="20" min="1" max="80" step="1">
+                </div>
+            </form>
+            <div class="drawdown-formula-box border rounded p-3 mt-3">
+                <h2 class="h5">Required gain</h2>
+                <math display="block" class="mb-3">
+                    <mrow>
+                        <mi>Gain</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mi>Loss</mi>
+                            <mrow>
+                                <mn>1</mn>
+                                <mo>-</mo>
+                                <mi>Loss</mi>
+                            </mrow>
+                        </mfrac>
+                    </mrow>
+                </math>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Loss</th>
+                                <th scope="col">Gain to recover</th>
+                            </tr>
+                        </thead>
+                        <tbody id="drawdown-reference-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">After drawdown</div>
+                        <div class="h4 mb-0 text-danger" id="drawdown-after-loss">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border border-warning rounded p-3 h-100 bg-warning-subtle">
+                        <div class="text-body-secondary small">Gain needed</div>
+                        <div class="h4 mb-0" id="drawdown-required-gain">0%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Recovery time</div>
+                        <div class="h4 mb-0" id="drawdown-recovery-time">0 years</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-success-subtle rounded p-3 mb-4 bg-success-subtle">
+                <div class="text-body-secondary small">Recovery path</div>
+                <div class="h4 mb-1" id="drawdown-recovery-note">Recovery starts from the smaller post-loss balance.</div>
+                <p class="mb-0" id="drawdown-contribution-note"></p>
+            </div>
+            <div class="interactive-action-bar">
+                <div class="btn-toolbar gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="drawdown-add-loss">+5% loss</button>
+                    <button type="button" class="btn btn-outline-primary" id="drawdown-add-return">+1% return</button>
+                    <button type="button" class="btn btn-outline-secondary" id="drawdown-reset">Reset</button>
+                    <button type="submit" class="btn btn-primary" form="drawdown-form">Calculate</button>
+                </div>
+            </div>
+            <canvas class="my-4 w-100" id="drawdownChart" width="900" height="380"></canvas>
+        </div>
+    </div>
+</main>
