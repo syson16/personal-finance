@@ -1,0 +1,114 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Volatility Drag</h1>
+    </div>
+
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
+        <h2 class="h5">Why 3x does not mean triple forever</h2>
+        <p class="mb-2">
+            Leveraged funds usually reset every day. They multiply each day's move, then compound from the new balance.
+        </p>
+        <p class="mb-2">
+            That means path matters. A choppy market can leave the plain index only slightly down while a 3x fund loses much more.
+        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <p class="mt-2">
+                A gain and an equal-sized loss do not cancel out. If an index goes from 100 to 110 and then falls 10%, it ends at 99. The 3x version goes from 100 to 130 and then falls 30%, ending at 91.
+            </p>
+            <p class="mb-0">
+                Leveraged funds can work in a strong, smooth trend. They are structurally fragile when the path is volatile, because losses compound from a smaller base and large daily swings create drag.
+            </p>
+        </details>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <form id="volatility-form" class="border rounded p-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="volatility-start" class="form-label">Starting balance</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" inputmode="decimal" class="form-control" id="volatility-start" value="10,000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="volatility-up-return" class="form-label">Up day return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="volatility-up-return" value="10" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="volatility-down-return" class="form-label">Down day return</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="volatility-down-return" value="-10" step="0.5">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="volatility-leverage" class="form-label">Daily leverage</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="volatility-leverage" value="3" min="1" max="5" step="0.5">
+                        <span class="input-group-text">x</span>
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <label for="volatility-cycles" class="form-label">Up/down cycles</label>
+                    <input type="number" class="form-control" id="volatility-cycles" value="6" min="1" max="60" step="1">
+                </div>
+            </form>
+            <div class="border rounded p-3 mt-3">
+                <h2 class="h5">Two-day example</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Path</th>
+                                <th scope="col">Index</th>
+                                <th scope="col">Leveraged</th>
+                            </tr>
+                        </thead>
+                        <tbody id="volatility-example-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Index final</div>
+                        <div class="h4 mb-0" id="volatility-index-final">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border border-danger rounded p-3 h-100 bg-danger-subtle">
+                        <div class="text-body-secondary small">Leveraged final</div>
+                        <div class="h4 mb-0 text-danger" id="volatility-leveraged-final">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-body-secondary small">Final gap</div>
+                        <div class="h4 mb-0" id="volatility-final-gap">$0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-warning-subtle rounded p-3 mb-4 bg-warning-subtle">
+                <div class="text-body-secondary small">Path risk</div>
+                <div class="h4 mb-1" id="volatility-drag-note">Daily reset leverage compounds each move.</div>
+                <p class="mb-0" id="volatility-drawdown-note"></p>
+            </div>
+            <div class="interactive-action-bar">
+                <div class="btn-toolbar gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="volatility-add-cycle">+1 cycle</button>
+                    <button type="button" class="btn btn-outline-primary" id="volatility-add-five">+5 cycles</button>
+                    <button type="button" class="btn btn-outline-secondary" id="volatility-reset">Reset</button>
+                    <button type="submit" class="btn btn-primary" form="volatility-form">Calculate</button>
+                </div>
+            </div>
+            <canvas class="my-4 w-100" id="volatilityChart" width="900" height="380"></canvas>
+        </div>
+    </div>
+</main>

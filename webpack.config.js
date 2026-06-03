@@ -12,7 +12,8 @@ module.exports = {
     main: './src/js/main.js',
     gamblersRuin: './src/js/gamblers-ruin.js',
     compoundInterest: './src/js/compound-interest.js',
-    growthComparison: './src/js/growth-comparison.js'
+    growthComparison: './src/js/growth-comparison.js',
+    volatilityDrag: './src/js/volatility-drag.js'
   },
   output: {
     filename: '[name].js',
@@ -43,6 +44,11 @@ module.exports = {
       filename: 'growth-comparison.html',
       template: './src/growth-comparison.html',
       chunks: ['main', 'growthComparison']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'volatility-drag.html',
+      template: './src/volatility-drag.html',
+      chunks: ['main', 'volatilityDrag']
     }),
     new MiniCssExtractPlugin({ filename: 'main.css' }),
     new CopyWebpackPlugin({
