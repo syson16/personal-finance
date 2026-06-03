@@ -3,16 +3,20 @@
         <h1 class="h2">Polynomial vs Exponential Growth</h1>
     </div>
 
-    <div class="mb-4">
-        <p class="text-body-secondary">
-            The exponential curve uses a small, realistic multiplier: <code>1.07</code>. After the first tiny value, it sits below <code>n^2</code> for a long time, then retakes the lead and keeps widening the gap.
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
+        <h2 class="h5">Why exponential growth eventually wins</h2>
+        <p class="mb-2">
+            The exponential curve uses a small, realistic multiplier: <code>1.07</code>. It sits below <code>n^2</code> for a long time, then retakes the lead and keeps widening the gap.
         </p>
-        <div class="border rounded p-3 bg-body-tertiary">
-            <h2 class="h5">Why this is compound interest</h2>
-            <p>
-                Exponential growth is the math behind compound interest. A 7% annual return means each period multiplies the previous balance by <code>1.07</code>, so after <code>n</code> periods the balance is <code>1.07^n</code>.
+        <p class="mb-2">
+            Exponential growth is the math behind compound interest: the next gain is earned on the whole previous result, not just on the original starting amount.
+        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <p class="mt-2">
+                A 7% annual return means each period multiplies the previous balance by <code>1.07</code>, so after <code>n</code> periods the balance is <code>1.07^n</code>.
             </p>
-            <div class="border rounded p-3 my-3 bg-body">
+            <div class="growth-formula-box border rounded p-3 my-3 bg-body">
                 <div class="text-body-secondary small mb-2">Compound interest with P = $100,000 and r = 7%</div>
                 <math display="block" class="mb-3">
                     <mrow>
@@ -62,12 +66,12 @@
                 </math>
             </div>
             <p>
-                The important part is that the next gain is earned on the whole previous result, not just on the original starting amount. Interest earns more interest. That repeated multiplication is why the green line looks quiet early and then bends upward later.
+                Interest earns more interest. That repeated multiplication is why the green line looks quiet early and then bends upward later.
             </p>
             <p class="mb-0">
                 Polynomial growth like <code>n^2</code> can look stronger at first because it adds larger absolute chunks early. But it is still built from powers of <code>n</code>. Compound interest is built from repeatedly multiplying by a return factor, and that eventually dominates.
             </p>
-        </div>
+        </details>
     </div>
 
     <div class="row g-3 mb-4">

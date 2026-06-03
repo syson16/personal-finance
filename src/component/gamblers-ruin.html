@@ -7,20 +7,29 @@
         </button>
             </div>
     </div>
-    <div class="border rounded p-3 bg-body-tertiary mb-4">
+    <div class="page-intro border rounded p-3 bg-body-tertiary mb-3">
         <h2 class="h5">Why a fair game can still end badly</h2>
-        <p>
+        <p class="mb-2">
             The player has a finite bankroll. In this simulation the win probability is 50%, so each flip looks fair in isolation, but the player cannot keep playing after the bankroll reaches zero.
         </p>
-        <p>
-            That stopping point changes the game. Wins let the player continue, but a long enough losing streak can end the entire sequence. Once the bankroll is gone, there is no next round where probability can even out.
-        </p>
-        <p>
+        <p class="mb-2">
             <strong>This is why betting options needs a real edge.</strong> If the trade is only fair, finite capital is still a problem: a run of losses can force you out before the long-run odds have time to show up.
         </p>
-        <p class="mb-0">
-            This is the core idea behind gambler's ruin: fair odds do not remove the risk of ruin when one side has limited money. Survival depends not only on the probability of winning a single round, but also on bankroll size, bet size, and how many rounds the player keeps taking.
-        </p>
+        <details>
+            <summary class="fw-semibold">More context</summary>
+            <p class="mt-2">
+                That stopping point changes the game. Wins let the player continue, but a long enough losing streak can end the entire sequence. Once the bankroll is gone, there is no next round where probability can even out.
+            </p>
+            <p>
+                Edge is not just being right often. It has to survive leverage, expiration, sizing, and costs.
+            </p>
+            <p>
+                In options, the edge has to be large enough to survive the structure of the trade. Leverage makes small moves matter more, expiration can turn a nearly-right idea into a total premium loss, and bid-ask spreads or commissions can turn a fair setup into a negative one. A strategy can be intellectually correct and still be untradeable if the bankroll cannot survive the losing streaks.
+            </p>
+            <p class="mb-0">
+                This is the core idea behind gambler's ruin: fair odds do not remove the risk of ruin when one side has limited money. Survival depends not only on the probability of winning a single round, but also on bankroll size, bet size, and how many rounds the player keeps taking.
+            </p>
+        </details>
     </div>
     <div class="row g-3 mb-4">
         <div class="col-sm-6 col-xl">
