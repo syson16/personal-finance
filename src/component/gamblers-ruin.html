@@ -63,15 +63,15 @@
             <div class="h4 fw-semibold text-primary mb-0" id="total-budget">$100</div>
         </div>
         <div class="btn-toolbar gap-2">
-            <button type="button" class="btn btn-primary" id="gambler-run">Run</button>
-            <button type="button" class="btn btn-success" id="gambler-onetime-run">One Time</button>
-            <button type="button" class="btn btn-danger" id="gambler-reset">Reset</button>
+            <button type="button" class="btn btn-primary" id="gambler-run" aria-label="Run up to 10 coin flips">Run 10 flips</button>
+            <button type="button" class="btn btn-success" id="gambler-onetime-run" aria-label="Run one coin flip">Flip once</button>
+            <button type="button" class="btn btn-danger" id="gambler-reset" aria-label="Reset the gambler's ruin simulation">Reset</button>
         </div>
     </div>
     <div class="gambler-chart-wrap">
         <div class="gambler-dead-overlay d-none" id="gambler-dead-overlay">
             <div class="h3 mb-3">YOU DIED</div>
-            <button type="button" class="btn btn-danger" id="gambler-dead-reset">Reset</button>
+            <button type="button" class="btn btn-danger" id="gambler-dead-reset" aria-label="Reset the gambler's ruin simulation">Reset</button>
         </div>
         <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
     </div>
